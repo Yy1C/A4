@@ -5,7 +5,8 @@
   "description": "Student dorm redecoration service booking and blueprint showcase with AI design features.",
   "main": "index.html",
   "scripts": {
-    "start": "npx serve"
+    "start": "npx serve",
+    "build": "vite build"
   },
   "keywords": [
     "react",
