@@ -1,0 +1,867 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Qiwuji Project</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #fff7ed;
+            color: #431407;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 3rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            text-align: center;
+            max-width: 450px;
+            border: 1px solid #ffedd5;
+        }
+        h1 { margin-top: 0; color: #ea580c; font-size: 1.5rem; margin-bottom: 0.5rem; }
+        p { color: #78716c; line-height: 1.6; margin-bottom: 2rem; }
+        button {
+            background-color: #ea580c;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgb(234 88 12 / 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        button:hover { background-color: #c2410c; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgb(234 88 12 / 0.4); }
+        button:active { transform: translateY(0); }
+        button:disabled { opacity: 0.7; cursor: wait; }
+        .icon { width: 24px; height: 24px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>栖物集 (Qiwuji) Downloader</h1>
+        <p>Your project is ready. Click the button below to download the source code as a ZIP file, ready for GitHub.</p>
+        <button onclick="downloadProject()" id="btn">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            Download ZIP
+        </button>
+        <p id="status" style="margin-top: 1rem; font-size: 0.9rem; display: none;"></p>
+    </div>
+
+    <script>
+        const files = {
+            "package.json": JSON.stringify({
+  "name": "qiwuji-dorm-decor",
+  "version": "1.0.0",
+  "description": "Student dorm redecoration service booking and blueprint showcase with AI design features.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve"
+  },
+  "keywords": [
+    "react",
+    "tailwindcss",
+    "gemini-api",
+    "student-dorm",
+    "interior-design"
+  ],
+  "author": "Qiwuji Team",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "@google/genai": "^1.30.0",
+    "lucide-react": "^0.554.0"
+  }
+}, null, 2),
+
+            "README.md": `# 栖物集 (Qiwuji) - Dorm Decor & Blueprint Service\n\nA modern, AI-powered web application for student dormitory decoration services. This platform allows students to generate room design concepts using Google Gemini and book professional redecoration services.\n\n## ✨ Features\n\n- **🤖 AI Dorm Consultant**: Uses Google Gemini 2.5 Flash to generate personalized interior design concepts, color palettes, and shopping lists based on student preferences.\n- **📅 Easy Booking System**: Streamlined form for booking "Online Blueprint" (¥10) or "Door-to-Door Decoration" (¥60) services.\n- **🎨 Inspiration Gallery**: A showcase of transformed dorm rooms.\n- **📱 Fully Responsive**: Looks great on mobile and desktop.\n\n## 🛠️ Tech Stack\n\n- **Frontend**: React 19\n- **Styling**: Tailwind CSS\n- **AI**: Google GenAI SDK (\`@google/genai\`)\n- **Icons**: Lucide React\n\n## 🚀 Getting Started\n\nThis project is designed as a lightweight, no-build application using ES Modules.\n\n1. **Clone the repository**\n2. **Set up your API Key**\n   - You need a valid Google Gemini API Key to use the AI Planner.\n   - The app expects \`process.env.API_KEY\` to be available.\n3. **Run the app**\n   - You can serve the files using any static server.\n   - Example with Python: \`python3 -m http.server\`\n   - Example with Node: \`npx serve\`\n\n## 📄 License\n\nThis project is for educational and demonstration purposes.`,
+
+            "metadata.json": JSON.stringify({
+  "name": "栖物集 (Qiwuji) - Dorm Decor",
+  "description": "Student dorm redecoration service booking and blueprint showcase. Features AI-powered design consultations and easy service scheduling.",
+  "requestFramePermissions": []
+}, null, 2),
+
+            "index.html": `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="栖物集 (Qiwuji) - Professional student dorm redecoration service. Get AI-powered design blueprints for ¥10 or full door-to-door decoration for ¥60." />
+    <title>栖物集 | Qiwuji Dorm Decor</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+      body {
+        font-family: 'Noto Sans SC', sans-serif;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+<\/script>
+</head>
+  <body class="bg-orange-50 text-stone-800 antialiased">
+    <div id="root"></div>
+  </body>
+</html>`,
+
+            "index.tsx": `import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error("Could not find root element to mount to");
+}
+
+const root = ReactDOM.createRoot(rootElement);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);`,
+
+            "types.ts": `export enum ServiceType {
+  BLUEPRINT = 'BLUEPRINT',
+  FULL_SERVICE = 'FULL_SERVICE'
+}
+
+export interface ServiceOption {
+  id: ServiceType;
+  title: string;
+  price: number;
+  description: string;
+  features: string[];
+}
+
+export interface BookingFormState {
+  name: string;
+  studentId: string;
+  dormNumber: string;
+  phone: string;
+  serviceType: ServiceType;
+  preferredDate: string;
+  notes: string;
+}
+
+export interface DesignIdea {
+  title: string;
+  concept: string;
+  colorPalette: string[];
+  furnitureArrangement: string;
+  decorItems: string[];
+}`,
+
+            "constants.tsx": `import { ServiceType, ServiceOption } from './types';
+import { PenTool, Hammer, Palette, Ruler } from 'lucide-react';
+import React from 'react';
+
+export const SERVICES: ServiceOption[] = [
+  {
+    id: ServiceType.BLUEPRINT,
+    title: "Online Blueprint Design",
+    price: 10,
+    description: "Perfect for DIYers. We provide the plan; you make it happen.",
+    features: [
+      "2D Layout Diagram (PDF)",
+      "Custom Color Palette",
+      "Shopping List with Links",
+      "Online Consultation (30 mins)"
+    ]
+  },
+  {
+    id: ServiceType.FULL_SERVICE,
+    title: "Door-to-Door Decoration",
+    price: 60,
+    description: "Sit back and relax. We transform your space for you.",
+    features: [
+      "Everything in Blueprint Design",
+      "On-site Furniture Arrangement",
+      "Decor Installation",
+      "Cable Management & Cleanup",
+      "Post-install Photo Shoot"
+    ]
+  }
+];
+
+export const GALLERY_IMAGES = [
+  {
+    url: "https://picsum.photos/id/106/800/600",
+    title: "Cozy Warmth",
+    desc: "A warm, light-filled setup for small spaces."
+  },
+  {
+    url: "https://picsum.photos/id/364/800/600",
+    title: "Modern Minimalist",
+    desc: "Clean lines and monochromatic tones."
+  },
+  {
+    url: "https://picsum.photos/id/449/800/600",
+    title: "Artistic Haven",
+    desc: "For the creative student."
+  },
+  {
+    url: "https://picsum.photos/id/180/800/600",
+    title: "Study Focus",
+    desc: "Optimized for productivity and focus."
+  }
+];`,
+
+            "App.tsx": `import React, { useState } from 'react';
+import Navbar from './components/Navbar';
+import BookingForm from './components/BookingForm';
+import AIPlanner from './components/AIPlanner';
+import { SERVICES, GALLERY_IMAGES } from './constants';
+import { ArrowRight, Star, Ruler, Truck } from 'lucide-react';
+
+const App: React.FC = () => {
+  const [activeTab, setActiveTab] = useState('home');
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'home':
+        return (
+          <div className="space-y-16 pb-20">
+            {/* Hero Section */}
+            <section className="relative h-[80vh] min-h-[500px] flex items-center justify-center rounded-b-[3rem] shadow-xl bg-orange-600">
+              <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
+                <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+                  栖物集 <span className="block text-xl md:text-3xl font-light mt-2 tracking-widest text-orange-100">QI WU JI</span>
+                </h1>
+                <p className="text-lg md:text-xl text-orange-50 mb-8 font-light leading-relaxed">
+                  Transform your campus dorm into a sanctuary. <br className="hidden md:block"/>
+                  Professional blueprints for 10 CNY. Full decoration for 60 CNY.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <button 
+                    onClick={() => setActiveTab('booking')}
+                    className="px-8 py-3 bg-white text-orange-600 hover:bg-orange-50 rounded-full font-semibold transition flex items-center justify-center gap-2 shadow-lg"
+                  >
+                    Book Now <ArrowRight size={18} />
+                  </button>
+                  <button 
+                    onClick={() => setActiveTab('planner')}
+                    className="px-8 py-3 bg-orange-700 hover:bg-orange-800 text-white border border-orange-500 rounded-full font-semibold transition"
+                  >
+                    Try AI Planner
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            {/* Services Overview */}
+            <section className="max-w-6xl mx-auto px-6">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-stone-800 mb-4">Our Services</h2>
+                <div className="w-16 h-1 bg-orange-500 mx-auto rounded-full"></div>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-8">
+                {SERVICES.map((service, index) => (
+                  <div key={index} className="bg-white p-8 rounded-2xl shadow-sm border border-orange-100 hover:shadow-md transition-shadow group">
+                    <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-6 text-orange-600 group-hover:scale-110 transition-transform">
+                      {index === 0 ? <Ruler size={24} /> : <Truck size={24} />}
+                    </div>
+                    <h3 className="text-2xl font-bold text-stone-800 mb-2">{service.title}</h3>
+                    <p className="text-4xl font-bold text-orange-600 mb-4">¥{service.price}</p>
+                    <p className="text-stone-500 mb-6">{service.description}</p>
+                    <ul className="space-y-3 mb-8">
+                      {service.features.map((feat, i) => (
+                        <li key={i} className="flex items-center gap-3 text-stone-600 text-sm">
+                          <div className="w-1.5 h-1.5 rounded-full bg-orange-400"></div>
+                          {feat}
+                        </li>
+                      ))}
+                    </ul>
+                    <button 
+                      onClick={() => setActiveTab('booking')}
+                      className="w-full py-3 border border-orange-600 text-orange-700 font-semibold rounded-xl hover:bg-orange-50 transition"
+                    >
+                      Choose Plan
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+        );
+
+      case 'gallery':
+        return (
+          <div className="pt-24 pb-20 px-6 max-w-6xl mx-auto min-h-screen">
+            <h2 className="text-3xl font-bold text-stone-800 mb-8">Previous Transformations</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {GALLERY_IMAGES.map((img, idx) => (
+                <div key={idx} className="group relative overflow-hidden rounded-2xl shadow-md cursor-pointer">
+                  <img 
+                    src={img.url} 
+                    alt={img.title} 
+                    className="w-full h-64 md:h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                    <h3 className="text-xl font-bold text-white">{img.title}</h3>
+                    <p className="text-stone-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity delay-100">{img.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-12 p-8 bg-white rounded-2xl text-center shadow-sm border border-orange-100">
+              <h3 className="text-xl font-bold text-stone-800 mb-2">Want to see your room here?</h3>
+              <p className="text-stone-600 mb-6">Join hundreds of students who have upgraded their living space.</p>
+              <button 
+                onClick={() => setActiveTab('booking')}
+                className="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition"
+              >
+                Start Your Project
+              </button>
+            </div>
+          </div>
+        );
+
+      case 'planner':
+        return (
+          <div className="pt-24 pb-20 px-6 min-h-screen">
+            <AIPlanner onBookNow={() => setActiveTab('booking')} />
+          </div>
+        );
+
+      case 'booking':
+        return (
+          <div className="pt-24 pb-20 px-6 min-h-screen">
+            <BookingForm />
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="min-h-screen text-stone-800 selection:bg-orange-200 selection:text-orange-900">
+      <Navbar activeTab={activeTab} setActiveTab={(tab) => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setActiveTab(tab);
+      }} />
+      
+      <main className="animate-in fade-in duration-500">
+        {renderContent()}
+      </main>
+
+      <footer className="bg-stone-900 text-stone-400 py-12 px-6 pb-24 md:pb-12 text-center text-sm">
+        <p className="font-bold text-stone-200 text-lg mb-2">栖物集 Qiwuji</p>
+        <p>© {new Date().getFullYear()} Campus Decoration Service. All rights reserved.</p>
+        <div className="mt-4 flex justify-center gap-4">
+          <a href="#" className="hover:text-orange-400 transition">Terms</a>
+          <a href="#" className="hover:text-orange-400 transition">Privacy</a>
+          <a href="#" className="hover:text-orange-400 transition">Contact</a>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;`,
+
+            "services/geminiService.ts": `import { GoogleGenAI, Type } from "@google/genai";
+import { DesignIdea } from '../types';
+
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
+export const generateDormConcept = async (
+  style: string,
+  roomSize: string,
+  occupants: number
+): Promise<DesignIdea> => {
+  try {
+    const prompt = \`
+      Create a dorm room interior design concept for a \${occupants}-person room.
+      Room size description: \${roomSize}.
+      Desired Style: \${style}.
+      
+      Provide a creative title, a concept description, a color palette (hex codes or names), 
+      layout advice (furniture arrangement), and a list of low-cost decor items suitable for students.
+      The output must be structured JSON.
+    \`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+      config: {
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: Type.OBJECT,
+          properties: {
+            title: { type: Type.STRING },
+            concept: { type: Type.STRING },
+            colorPalette: { 
+              type: Type.ARRAY, 
+              items: { type: Type.STRING } 
+            },
+            furnitureArrangement: { type: Type.STRING },
+            decorItems: { 
+              type: Type.ARRAY, 
+              items: { type: Type.STRING } 
+            }
+          },
+          required: ["title", "concept", "colorPalette", "furnitureArrangement", "decorItems"]
+        }
+      }
+    });
+
+    const text = response.text;
+    if (!text) throw new Error("No response from AI");
+    
+    return JSON.parse(text) as DesignIdea;
+
+  } catch (error) {
+    console.error("Error generating design:", error);
+    throw error;
+  }
+};`,
+
+            "components/Navbar.tsx": `import React from 'react';
+import { Home, Image, Calendar, Sparkles } from 'lucide-react';
+
+interface NavbarProps {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
+  const navItems = [
+    { id: 'home', label: 'Home', icon: Home },
+    { id: 'gallery', label: 'Blueprints', icon: Image },
+    { id: 'planner', label: 'AI Planner', icon: Sparkles },
+    { id: 'booking', label: 'Book Now', icon: Calendar },
+  ];
+
+  return (
+    <nav className="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-stone-200 p-2 md:top-0 md:bottom-auto md:border-b md:border-t-0 z-50">
+      <div className="max-w-4xl mx-auto flex justify-around md:justify-end md:gap-8 items-center h-14">
+        <div className="hidden md:flex flex-1 text-2xl font-bold text-orange-600 tracking-tighter">
+          栖物集 <span className="text-stone-400 font-light text-lg ml-2">Qiwuji</span>
+        </div>
+        {navItems.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => setActiveTab(item.id)}
+            className={\`flex flex-col md:flex-row items-center gap-1 md:gap-2 px-3 py-2 rounded-lg transition-colors duration-200
+              \${activeTab === item.id 
+                ? 'text-orange-700 bg-orange-50' 
+                : 'text-stone-500 hover:text-orange-600 hover:bg-stone-50'}\`}
+          >
+            <item.icon size={20} strokeWidth={activeTab === item.id ? 2.5 : 2} />
+            <span className="text-xs md:text-sm font-medium">{item.label}</span>
+          </button>
+        ))}
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;`,
+
+            "components/BookingForm.tsx": `import React, { useState } from 'react';
+import { ServiceType, BookingFormState } from '../types';
+import { SERVICES } from '../constants';
+import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+
+const BookingForm: React.FC = () => {
+  const [formData, setFormData] = useState<BookingFormState>({
+    name: '',
+    studentId: '',
+    dormNumber: '',
+    phone: '',
+    serviceType: ServiceType.BLUEPRINT,
+    preferredDate: '',
+    notes: ''
+  });
+
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  const handleServiceSelect = (type: ServiceType) => {
+    setFormData(prev => ({ ...prev, serviceType: type }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('submitting');
+    
+    // Simulate API call
+    setTimeout(() => {
+      setStatus('success');
+      // In a real app, reset form or redirect here
+    }, 1500);
+  };
+
+  if (status === 'success') {
+    return (
+      <div className="flex flex-col items-center justify-center p-12 bg-orange-50 rounded-2xl border border-orange-100 animate-in fade-in zoom-in duration-300">
+        <CheckCircle2 size={64} className="text-orange-600 mb-4" />
+        <h2 className="text-2xl font-bold text-orange-800 mb-2">Booking Confirmed!</h2>
+        <p className="text-center text-stone-600 mb-6">
+          Thank you, {formData.name}. We have received your request for the <span className="font-semibold">{formData.serviceType === ServiceType.BLUEPRINT ? 'Blueprint Design' : 'Full Decoration'}</span> service.
+        </p>
+        <p className="text-sm text-stone-500">We will contact you at {formData.phone} shortly.</p>
+        <button 
+          onClick={() => setStatus('idle')}
+          className="mt-8 px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition"
+        >
+          Book Another
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200">
+      <h2 className="text-2xl font-bold text-stone-800 mb-6">Book Your Transformation</h2>
+      
+      <form onSubmit={handleSubmit} className="space-y-6">
+        
+        {/* Service Selection */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {SERVICES.map((service) => (
+            <div
+              key={service.id}
+              onClick={() => handleServiceSelect(service.id)}
+              className={\`cursor-pointer p-4 rounded-xl border-2 transition-all duration-200 relative
+                \${formData.serviceType === service.id 
+                  ? 'border-orange-500 bg-orange-50/50' 
+                  : 'border-stone-200 hover:border-orange-200 hover:bg-stone-50'}\`}
+            >
+              {formData.serviceType === service.id && (
+                <div className="absolute top-3 right-3 text-orange-600">
+                  <CheckCircle2 size={20} />
+                </div>
+              )}
+              <h3 className="font-bold text-lg text-stone-800">{service.title}</h3>
+              <p className="text-orange-600 font-bold text-xl my-1">¥{service.price}</p>
+              <p className="text-xs text-stone-500">{service.description}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Personal Details */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-stone-700 mb-1">Full Name</label>
+            <input
+              required
+              name="name"
+              type="text"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded-lg border border-stone-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
+              placeholder="Li Ming"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-stone-700 mb-1">Phone Number</label>
+            <input
+              required
+              name="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded-lg border border-stone-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
+              placeholder="138 0000 0000"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-stone-700 mb-1">Student ID</label>
+            <input
+              required
+              name="studentId"
+              type="text"
+              value={formData.studentId}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded-lg border border-stone-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-stone-700 mb-1">Dorm Building & Room</label>
+            <input
+              required
+              name="dormNumber"
+              type="text"
+              value={formData.dormNumber}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded-lg border border-stone-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
+              placeholder="Building A, Room 302"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-stone-700 mb-1">Preferred Date (For On-site Service)</label>
+          <input
+            name="preferredDate"
+            type="date"
+            value={formData.preferredDate}
+            onChange={handleChange}
+            className="w-full px-4 py-2 rounded-lg border border-stone-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-stone-700 mb-1">Special Requests / Style Preferences</label>
+          <textarea
+            name="notes"
+            rows={3}
+            value={formData.notes}
+            onChange={handleChange}
+            className="w-full px-4 py-2 rounded-lg border border-stone-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
+            placeholder="I prefer warm lighting and a minimalist desk setup..."
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={status === 'submitting'}
+          className="w-full py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2"
+        >
+          {status === 'submitting' ? (
+            <>
+              <Loader2 className="animate-spin" size={20} /> Processing...
+            </>
+          ) : (
+            'Confirm Booking'
+          )}
+        </button>
+
+      </form>
+    </div>
+  );
+};
+
+export default BookingForm;`,
+
+            "components/AIPlanner.tsx": `import React, { useState } from 'react';
+import { generateDormConcept } from '../services/geminiService';
+import { DesignIdea } from '../types';
+import { Sparkles, Palette, Armchair, ShoppingBag, ArrowRight } from 'lucide-react';
+
+interface AIPlannerProps {
+  onBookNow: () => void;
+}
+
+const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
+  const [style, setStyle] = useState('');
+  const [roomSize, setRoomSize] = useState('Standard 4-bunk dorm');
+  const [occupants, setOccupants] = useState(4);
+  const [idea, setIdea] = useState<DesignIdea | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleGenerate = async () => {
+    if (!style.trim()) return;
+    setLoading(true);
+    setError('');
+    setIdea(null);
+    try {
+      const result = await generateDormConcept(style, roomSize, occupants);
+      setIdea(result);
+    } catch (err) {
+      setError("Failed to generate ideas. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto space-y-8">
+      <div className="text-center space-y-4">
+        <h2 className="text-3xl font-bold text-stone-800 flex items-center justify-center gap-2">
+          <Sparkles className="text-orange-500" fill="currentColor" />
+          AI Dorm Consultant
+        </h2>
+        <p className="text-stone-600 max-w-xl mx-auto">
+          Not sure where to start? Tell our AI about your style preferences, and we'll generate a free concept card for you. 
+          Like what you see? Book our blueprint service for the full execution plan!
+        </p>
+      </div>
+
+      {/* Input Section */}
+      <div className="bg-white p-6 rounded-2xl shadow-sm border border-orange-100 grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+        <div>
+          <label className="block text-xs font-semibold uppercase text-stone-500 mb-1">Your Style</label>
+          <input 
+            type="text" 
+            value={style}
+            onChange={(e) => setStyle(e.target.value)}
+            placeholder="e.g. Minimalist, Boho, Cyberpunk"
+            className="w-full p-3 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold uppercase text-stone-500 mb-1">Room Type</label>
+          <select 
+            value={roomSize}
+            onChange={(e) => setRoomSize(e.target.value)}
+            className="w-full p-3 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+          >
+            <option>Standard 4-bunk dorm</option>
+            <option>6-person shared suite</option>
+            <option>Double room</option>
+            <option>Single studio</option>
+          </select>
+        </div>
+        <button
+          onClick={handleGenerate}
+          disabled={loading || !style}
+          className="w-full p-3 bg-stone-800 text-white rounded-lg hover:bg-stone-900 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition flex items-center justify-center gap-2"
+        >
+          {loading ? 'Thinking...' : 'Generate Idea'}
+        </button>
+      </div>
+
+      {error && (
+        <div className="p-4 bg-red-50 text-red-600 rounded-lg text-center">
+          {error}
+        </div>
+      )}
+
+      {/* Result Section */}
+      {idea && (
+        <div className="bg-white border border-orange-200 rounded-2xl p-6 md:p-8 animate-in slide-in-from-bottom-4 duration-500 shadow-lg shadow-orange-100">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <div>
+              <h3 className="text-2xl font-bold text-orange-600">{idea.title}</h3>
+              <p className="text-stone-600 italic mt-1">{idea.concept}</p>
+            </div>
+            <button 
+              onClick={onBookNow}
+              className="whitespace-nowrap px-6 py-2 bg-orange-600 text-white rounded-full font-medium hover:bg-orange-700 transition flex items-center gap-2 shadow-lg shadow-orange-200"
+            >
+              Get Full Blueprint ¥10 <ArrowRight size={16} />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-orange-50/50 p-5 rounded-xl shadow-sm border border-orange-100">
+              <div className="flex items-center gap-2 mb-3 text-stone-800 font-semibold">
+                <Palette size={18} className="text-orange-500" /> Color Palette
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {idea.colorPalette.map((color, idx) => (
+                  <div key={idx} className="flex flex-col items-center gap-1">
+                    <div 
+                      className="w-10 h-10 rounded-full border border-stone-100 shadow-inner" 
+                      style={{ backgroundColor: color.includes('#') ? color : '#e5e7eb' }} 
+                    />
+                    <span className="text-[10px] text-stone-500 uppercase">{color.replace('#','')}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-stone-50 p-5 rounded-xl shadow-sm border border-stone-100">
+              <div className="flex items-center gap-2 mb-3 text-stone-800 font-semibold">
+                <Armchair size={18} className="text-orange-500" /> Layout Advice
+              </div>
+              <p className="text-sm text-stone-600 leading-relaxed">
+                {idea.furnitureArrangement}
+              </p>
+            </div>
+
+            <div className="bg-stone-50 p-5 rounded-xl shadow-sm border border-stone-100">
+              <div className="flex items-center gap-2 mb-3 text-stone-800 font-semibold">
+                <ShoppingBag size={18} className="text-orange-500" /> Suggested Decor
+              </div>
+              <ul className="text-sm text-stone-600 space-y-1 list-disc pl-4">
+                {idea.decorItems.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          
+          <div className="mt-6 text-center text-xs text-stone-400">
+            * This is an AI-generated preview. Book the Blueprint Service for exact measurements and shopping links.
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AIPlanner;`
+        };
+
+        async function downloadProject() {
+            const btn = document.getElementById('btn');
+            const status = document.getElementById('status');
+            
+            btn.disabled = true;
+            status.style.display = 'block';
+            status.innerText = "Packing files...";
+            status.style.color = "#78716c";
+
+            try {
+                const zip = new JSZip();
+                
+                // Add all files to the zip
+                for (const [path, content] of Object.entries(files)) {
+                    zip.file(path, content);
+                }
+                
+                // Generate zip blob
+                const blob = await zip.generateAsync({type: "blob"});
+                
+                // Trigger download
+                saveAs(blob, "qiwuji-dorm-decor.zip");
+                
+                status.innerText = "Download started!";
+                status.style.color = "#16a34a"; // green
+                
+                setTimeout(() => {
+                    btn.disabled = false;
+                    status.style.display = 'none';
+                }, 3000);
+
+            } catch (err) {
+                console.error("Zip Error:", err);
+                status.innerText = "Error creating zip file. See console.";
+                status.style.color = "#dc2626"; // red
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
+    
