@@ -5,7 +5,7 @@ A modern, AI-powered web application for student dormitory decoration services. 
 ## ✨ Features
 
 - **🤖 AI Dorm Consultant**: Uses Google Gemini 2.5 Flash to generate personalized interior design concepts, color palettes, and shopping lists based on student preferences.
-- **📅 Easy Booking System**: Streamlined form for booking "Online Blueprint" (¥10) or "Door-to-Door Decoration" (¥60) services.
+- **📅 Easy Booking System**: Streamlined form for booking "Online Blueprint" (¥10) or "Door-to-Door Decoration" (¥40) services.
 - **🎨 Inspiration Gallery**: A showcase of transformed dorm rooms.
 - **📱 Fully Responsive**: Looks great on mobile and desktop.
 

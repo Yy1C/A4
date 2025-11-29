@@ -17,6 +17,7 @@ export const generateDormConcept = async (
       Provide a creative title, a concept description, a color palette (hex codes or names), 
       layout advice (furniture arrangement), and a list of low-cost decor items suitable for students.
       The output must be structured JSON.
+      IMPORTANT: All text content in the JSON must be in Simplified Chinese (zh-CN).
     `;
 
     const response = await ai.models.generateContent({

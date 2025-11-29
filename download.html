@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Qiwuji Project</title>
+    <title>下载栖物集项目</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <style>
@@ -44,6 +44,8 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            width: 100%;
+            justify-content: center;
         }
         button:hover { background-color: #c2410c; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgb(234 88 12 / 0.4); }
         button:active { transform: translateY(0); }
@@ -53,11 +55,12 @@
 </head>
 <body>
     <div class="card">
-        <h1>栖物集 (Qiwuji) Downloader</h1>
-        <p>Your project is ready. Click the button below to download the source code as a ZIP file, ready for GitHub.</p>
+        <h1>栖物集 (Qiwuji) 下载器</h1>
+        <p>一键下载所有项目代码，解压后即可使用。</p>
+
         <button onclick="downloadProject()" id="btn">
             <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-            Download ZIP
+            下载项目压缩包
         </button>
         <p id="status" style="margin-top: 1rem; font-size: 0.9rem; display: none;"></p>
     </div>
@@ -89,21 +92,21 @@
   }
 }, null, 2),
 
-            "README.md": `# 栖物集 (Qiwuji) - Dorm Decor & Blueprint Service\n\nA modern, AI-powered web application for student dormitory decoration services. This platform allows students to generate room design concepts using Google Gemini and book professional redecoration services.\n\n## ✨ Features\n\n- **🤖 AI Dorm Consultant**: Uses Google Gemini 2.5 Flash to generate personalized interior design concepts, color palettes, and shopping lists based on student preferences.\n- **📅 Easy Booking System**: Streamlined form for booking "Online Blueprint" (¥10) or "Door-to-Door Decoration" (¥60) services.\n- **🎨 Inspiration Gallery**: A showcase of transformed dorm rooms.\n- **📱 Fully Responsive**: Looks great on mobile and desktop.\n\n## 🛠️ Tech Stack\n\n- **Frontend**: React 19\n- **Styling**: Tailwind CSS\n- **AI**: Google GenAI SDK (\`@google/genai\`)\n- **Icons**: Lucide React\n\n## 🚀 Getting Started\n\nThis project is designed as a lightweight, no-build application using ES Modules.\n\n1. **Clone the repository**\n2. **Set up your API Key**\n   - You need a valid Google Gemini API Key to use the AI Planner.\n   - The app expects \`process.env.API_KEY\` to be available.\n3. **Run the app**\n   - You can serve the files using any static server.\n   - Example with Python: \`python3 -m http.server\`\n   - Example with Node: \`npx serve\`\n\n## 📄 License\n\nThis project is for educational and demonstration purposes.`,
+            "README.md": `# 栖物集 (Qiwuji) - 宿舍改造与 AI 设计平台\n\n一个现代化的、由 AI 驱动的学生宿舍装饰服务 Web 应用。该平台允许学生使用 Google Gemini 生成个性化的房间设计理念，并预约专业的改造服务。\n\n## ✨ 功能特点\n\n- **🤖 AI 宿舍顾问**: 使用 Google Gemini 2.5 Flash 根据学生的偏好生成个性化的室内设计理念、配色方案和购物清单。\n- **📅 便捷预约系统**: 流程化的表单，用于预约“线上设计方案”(¥10) 或“上门全案改造”(¥40) 服务。\n- **🎨 灵感画廊**: 展示改造后的宿舍案例。\n- **📱 完全响应式**: 在手机和电脑上都能完美展示。\n\n## 🛠️ 技术栈\n\n- **前端**: React 19\n- **样式**: Tailwind CSS\n- **AI**: Google GenAI SDK (\`@google/genai\`)\n- **图标**: Lucide React\n\n## 🚀 快速开始\n\n本项目设计为轻量级的无构建应用，使用 ES Modules。\n\n1. **克隆仓库**\n2. **设置 API Key**\n   - 您需要一个有效的 Google Gemini API Key 来使用 AI 设计师功能。\n   - 应用期望 \`process.env.API_KEY\` 可用。\n3. **运行应用**\n   - 您可以使用任何静态服务器运行文件。\n   - Python 示例: \`python3 -m http.server\`\n   - Node 示例: \`npx serve\`\n\n## 📄 许可证\n\n本项目仅供教育和演示使用。`,
 
             "metadata.json": JSON.stringify({
-  "name": "栖物集 (Qiwuji) - Dorm Decor",
-  "description": "Student dorm redecoration service booking and blueprint showcase. Features AI-powered design consultations and easy service scheduling.",
+  "name": "栖物集 (Qiwuji) - 宿舍改造",
+  "description": "学生宿舍改造服务预订与案例展示。提供 AI 辅助设计咨询及便捷的在线预约服务。",
   "requestFramePermissions": []
 }, null, 2),
 
             "index.html": `<!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="栖物集 (Qiwuji) - Professional student dorm redecoration service. Get AI-powered design blueprints for ¥10 or full door-to-door decoration for ¥60." />
-    <title>栖物集 | Qiwuji Dorm Decor</title>
+    <meta name="description" content="栖物集 (Qiwuji) - 专业的学生宿舍改造服务。获取 AI 设计方案仅需 ¥10，全案上门改造 ¥40。" />
+    <title>栖物集 | 校园宿舍改造</title>
     <script src="https://cdn.tailwindcss.com"><\/script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
@@ -182,60 +185,38 @@ import React from 'react';
 export const SERVICES: ServiceOption[] = [
   {
     id: ServiceType.BLUEPRINT,
-    title: "Online Blueprint Design",
+    title: "线上设计方案",
     price: 10,
-    description: "Perfect for DIYers. We provide the plan; you make it happen.",
+    description: "适合动手能力强的同学。我们提供方案，你来实现。",
     features: [
-      "2D Layout Diagram (PDF)",
-      "Custom Color Palette",
-      "Shopping List with Links",
-      "Online Consultation (30 mins)"
+      "2D 平面布局图 (PDF)",
+      "定制配色方案",
+      "软装购物清单 (含链接)",
+      "线上咨询 (30分钟)"
     ]
   },
   {
     id: ServiceType.FULL_SERVICE,
-    title: "Door-to-Door Decoration",
-    price: 60,
-    description: "Sit back and relax. We transform your space for you.",
+    title: "上门全案改造",
+    price: 40,
+    description: "坐享其成。我们为你搞定一切。",
     features: [
-      "Everything in Blueprint Design",
-      "On-site Furniture Arrangement",
-      "Decor Installation",
-      "Cable Management & Cleanup",
-      "Post-install Photo Shoot"
+      "包含所有线上设计服务",
+      "上门家具布局调整",
+      "软装安装与布置",
+      "线路收纳与清洁",
+      "改造后精美摄影"
     ]
   }
 ];
-
-export const GALLERY_IMAGES = [
-  {
-    url: "https://picsum.photos/id/106/800/600",
-    title: "Cozy Warmth",
-    desc: "A warm, light-filled setup for small spaces."
-  },
-  {
-    url: "https://picsum.photos/id/364/800/600",
-    title: "Modern Minimalist",
-    desc: "Clean lines and monochromatic tones."
-  },
-  {
-    url: "https://picsum.photos/id/449/800/600",
-    title: "Artistic Haven",
-    desc: "For the creative student."
-  },
-  {
-    url: "https://picsum.photos/id/180/800/600",
-    title: "Study Focus",
-    desc: "Optimized for productivity and focus."
-  }
-];`,
+`,
 
             "App.tsx": `import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import BookingForm from './components/BookingForm';
 import AIPlanner from './components/AIPlanner';
-import { SERVICES, GALLERY_IMAGES } from './constants';
-import { ArrowRight, Star, Ruler, Truck } from 'lucide-react';
+import { SERVICES } from './constants';
+import { ArrowRight, Ruler, Truck } from 'lucide-react';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('home');
@@ -246,27 +227,28 @@ const App: React.FC = () => {
         return (
           <div className="space-y-16 pb-20">
             {/* Hero Section */}
-            <section className="relative h-[80vh] min-h-[500px] flex items-center justify-center rounded-b-[3rem] shadow-xl bg-orange-600">
-              <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-                <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+            <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center rounded-b-[3rem] shadow-xl bg-orange-600 overflow-hidden">
+              <div className="relative z-10 text-center px-4 max-w-3xl mx-auto flex flex-col items-center">
+                
+                <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight animate-in slide-in-from-bottom-4 duration-700 delay-150">
                   栖物集 <span className="block text-xl md:text-3xl font-light mt-2 tracking-widest text-orange-100">QI WU JI</span>
                 </h1>
-                <p className="text-lg md:text-xl text-orange-50 mb-8 font-light leading-relaxed">
-                  Transform your campus dorm into a sanctuary. <br className="hidden md:block"/>
-                  Professional blueprints for 10 CNY. Full decoration for 60 CNY.
+                <p className="text-lg md:text-xl text-orange-50 mb-8 font-light leading-relaxed animate-in slide-in-from-bottom-4 duration-700 delay-300">
+                  打造理想的校园生活空间。<br className="hidden md:block"/>
+                  专业线上设计 ¥10 | 上门全案改造 ¥40
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center animate-in slide-in-from-bottom-4 duration-700 delay-500">
                   <button 
                     onClick={() => setActiveTab('booking')}
                     className="px-8 py-3 bg-white text-orange-600 hover:bg-orange-50 rounded-full font-semibold transition flex items-center justify-center gap-2 shadow-lg"
                   >
-                    Book Now <ArrowRight size={18} />
+                    立即预约 <ArrowRight size={18} />
                   </button>
                   <button 
                     onClick={() => setActiveTab('planner')}
                     className="px-8 py-3 bg-orange-700 hover:bg-orange-800 text-white border border-orange-500 rounded-full font-semibold transition"
                   >
-                    Try AI Planner
+                    体验 AI 设计
                   </button>
                 </div>
               </div>
@@ -275,7 +257,7 @@ const App: React.FC = () => {
             {/* Services Overview */}
             <section className="max-w-6xl mx-auto px-6">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-stone-800 mb-4">Our Services</h2>
+                <h2 className="text-3xl font-bold text-stone-800 mb-4">服务项目</h2>
                 <div className="w-16 h-1 bg-orange-500 mx-auto rounded-full"></div>
               </div>
               
@@ -300,44 +282,12 @@ const App: React.FC = () => {
                       onClick={() => setActiveTab('booking')}
                       className="w-full py-3 border border-orange-600 text-orange-700 font-semibold rounded-xl hover:bg-orange-50 transition"
                     >
-                      Choose Plan
+                      选择此方案
                     </button>
                   </div>
                 ))}
               </div>
             </section>
-          </div>
-        );
-
-      case 'gallery':
-        return (
-          <div className="pt-24 pb-20 px-6 max-w-6xl mx-auto min-h-screen">
-            <h2 className="text-3xl font-bold text-stone-800 mb-8">Previous Transformations</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {GALLERY_IMAGES.map((img, idx) => (
-                <div key={idx} className="group relative overflow-hidden rounded-2xl shadow-md cursor-pointer">
-                  <img 
-                    src={img.url} 
-                    alt={img.title} 
-                    className="w-full h-64 md:h-80 object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
-                    <h3 className="text-xl font-bold text-white">{img.title}</h3>
-                    <p className="text-stone-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity delay-100">{img.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-12 p-8 bg-white rounded-2xl text-center shadow-sm border border-orange-100">
-              <h3 className="text-xl font-bold text-stone-800 mb-2">Want to see your room here?</h3>
-              <p className="text-stone-600 mb-6">Join hundreds of students who have upgraded their living space.</p>
-              <button 
-                onClick={() => setActiveTab('booking')}
-                className="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition"
-              >
-                Start Your Project
-              </button>
-            </div>
           </div>
         );
 
@@ -373,11 +323,11 @@ const App: React.FC = () => {
 
       <footer className="bg-stone-900 text-stone-400 py-12 px-6 pb-24 md:pb-12 text-center text-sm">
         <p className="font-bold text-stone-200 text-lg mb-2">栖物集 Qiwuji</p>
-        <p>© {new Date().getFullYear()} Campus Decoration Service. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} 校园宿舍改造服务. 保留所有权利。</p>
         <div className="mt-4 flex justify-center gap-4">
-          <a href="#" className="hover:text-orange-400 transition">Terms</a>
-          <a href="#" className="hover:text-orange-400 transition">Privacy</a>
-          <a href="#" className="hover:text-orange-400 transition">Contact</a>
+          <a href="#" className="hover:text-orange-400 transition">服务条款</a>
+          <a href="#" className="hover:text-orange-400 transition">隐私政策</a>
+          <a href="#" className="hover:text-orange-400 transition">联系我们</a>
         </div>
       </footer>
     </div>
@@ -405,6 +355,7 @@ export const generateDormConcept = async (
       Provide a creative title, a concept description, a color palette (hex codes or names), 
       layout advice (furniture arrangement), and a list of low-cost decor items suitable for students.
       The output must be structured JSON.
+      IMPORTANT: All text content in the JSON must be in Simplified Chinese (zh-CN).
     \`;
 
     const response = await ai.models.generateContent({
@@ -444,7 +395,7 @@ export const generateDormConcept = async (
 };`,
 
             "components/Navbar.tsx": `import React from 'react';
-import { Home, Image, Calendar, Sparkles } from 'lucide-react';
+import { Home, Calendar, Sparkles } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
@@ -453,17 +404,18 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   const navItems = [
-    { id: 'home', label: 'Home', icon: Home },
-    { id: 'gallery', label: 'Blueprints', icon: Image },
-    { id: 'planner', label: 'AI Planner', icon: Sparkles },
-    { id: 'booking', label: 'Book Now', icon: Calendar },
+    { id: 'home', label: '首页', icon: Home },
+    { id: 'planner', label: 'AI 设计师', icon: Sparkles },
+    { id: 'booking', label: '立即预约', icon: Calendar },
   ];
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-stone-200 p-2 md:top-0 md:bottom-auto md:border-b md:border-t-0 z-50">
       <div className="max-w-4xl mx-auto flex justify-around md:justify-end md:gap-8 items-center h-14">
-        <div className="hidden md:flex flex-1 text-2xl font-bold text-orange-600 tracking-tighter">
-          栖物集 <span className="text-stone-400 font-light text-lg ml-2">Qiwuji</span>
+        <div className="hidden md:flex flex-1 items-center gap-3">
+          <div className="text-2xl font-bold text-orange-600 tracking-tighter">
+            栖物集 <span className="text-stone-400 font-light text-lg ml-1">Qiwuji</span>
+          </div>
         </div>
         {navItems.map((item) => (
           <button
@@ -529,16 +481,16 @@ const BookingForm: React.FC = () => {
     return (
       <div className="flex flex-col items-center justify-center p-12 bg-orange-50 rounded-2xl border border-orange-100 animate-in fade-in zoom-in duration-300">
         <CheckCircle2 size={64} className="text-orange-600 mb-4" />
-        <h2 className="text-2xl font-bold text-orange-800 mb-2">Booking Confirmed!</h2>
+        <h2 className="text-2xl font-bold text-orange-800 mb-2">预约成功！</h2>
         <p className="text-center text-stone-600 mb-6">
-          Thank you, {formData.name}. We have received your request for the <span className="font-semibold">{formData.serviceType === ServiceType.BLUEPRINT ? 'Blueprint Design' : 'Full Decoration'}</span> service.
+          感谢您，{formData.name}。我们已收到您关于 <span className="font-semibold">{formData.serviceType === ServiceType.BLUEPRINT ? '线上设计方案' : '上门全案改造'}</span> 的预约申请。
         </p>
-        <p className="text-sm text-stone-500">We will contact you at {formData.phone} shortly.</p>
+        <p className="text-sm text-stone-500">我们会尽快通过 {formData.phone} 联系您。</p>
         <button 
           onClick={() => setStatus('idle')}
           className="mt-8 px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition"
         >
-          Book Another
+          再约一单
         </button>
       </div>
     );
@@ -546,7 +498,7 @@ const BookingForm: React.FC = () => {
 
   return (
     <div className="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200">
-      <h2 className="text-2xl font-bold text-stone-800 mb-6">Book Your Transformation</h2>
+      <h2 className="text-2xl font-bold text-stone-800 mb-6">预约您的宿舍改造</h2>
       
       <form onSubmit={handleSubmit} className="space-y-6">
         
@@ -576,7 +528,7 @@ const BookingForm: React.FC = () => {
         {/* Personal Details */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-1">Full Name</label>
+            <label className="block text-sm font-medium text-stone-700 mb-1">姓名</label>
             <input
               required
               name="name"
@@ -584,11 +536,11 @@ const BookingForm: React.FC = () => {
               value={formData.name}
               onChange={handleChange}
               className="w-full px-4 py-2 rounded-lg border border-stone-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
-              placeholder="Li Ming"
+              placeholder="李明"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-1">Phone Number</label>
+            <label className="block text-sm font-medium text-stone-700 mb-1">手机号码</label>
             <input
               required
               name="phone"
@@ -603,7 +555,7 @@ const BookingForm: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-1">Student ID</label>
+            <label className="block text-sm font-medium text-stone-700 mb-1">学号</label>
             <input
               required
               name="studentId"
@@ -614,7 +566,7 @@ const BookingForm: React.FC = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-1">Dorm Building & Room</label>
+            <label className="block text-sm font-medium text-stone-700 mb-1">宿舍楼及房间号</label>
             <input
               required
               name="dormNumber"
@@ -622,13 +574,13 @@ const BookingForm: React.FC = () => {
               value={formData.dormNumber}
               onChange={handleChange}
               className="w-full px-4 py-2 rounded-lg border border-stone-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
-              placeholder="Building A, Room 302"
+              placeholder="A栋 302室"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">Preferred Date (For On-site Service)</label>
+          <label className="block text-sm font-medium text-stone-700 mb-1">期望上门日期 (仅限上门服务)</label>
           <input
             name="preferredDate"
             type="date"
@@ -639,14 +591,14 @@ const BookingForm: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">Special Requests / Style Preferences</label>
+          <label className="block text-sm font-medium text-stone-700 mb-1">特殊需求 / 风格偏好</label>
           <textarea
             name="notes"
             rows={3}
             value={formData.notes}
             onChange={handleChange}
             className="w-full px-4 py-2 rounded-lg border border-stone-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
-            placeholder="I prefer warm lighting and a minimalist desk setup..."
+            placeholder="例如：我喜欢暖色调灯光，想要一个极简风格的桌面..."
           />
         </div>
 
@@ -657,10 +609,10 @@ const BookingForm: React.FC = () => {
         >
           {status === 'submitting' ? (
             <>
-              <Loader2 className="animate-spin" size={20} /> Processing...
+              <Loader2 className="animate-spin" size={20} /> 提交中...
             </>
           ) : (
-            'Confirm Booking'
+            '确认预约'
           )}
         </button>
 
@@ -682,7 +634,7 @@ interface AIPlannerProps {
 
 const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
   const [style, setStyle] = useState('');
-  const [roomSize, setRoomSize] = useState('Standard 4-bunk dorm');
+  const [roomSize, setRoomSize] = useState('标准四人间 (上床下桌)');
   const [occupants, setOccupants] = useState(4);
   const [idea, setIdea] = useState<DesignIdea | null>(null);
   const [loading, setLoading] = useState(false);
@@ -697,7 +649,7 @@ const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
       const result = await generateDormConcept(style, roomSize, occupants);
       setIdea(result);
     } catch (err) {
-      setError("Failed to generate ideas. Please try again.");
+      setError("生成失败，请重试。");
     } finally {
       setLoading(false);
     }
@@ -708,37 +660,35 @@ const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
       <div className="text-center space-y-4">
         <h2 className="text-3xl font-bold text-stone-800 flex items-center justify-center gap-2">
           <Sparkles className="text-orange-500" fill="currentColor" />
-          AI Dorm Consultant
+          AI 宿舍改造顾问
         </h2>
         <p className="text-stone-600 max-w-xl mx-auto">
-          Not sure where to start? Tell our AI about your style preferences, and we'll generate a free concept card for you. 
-          Like what you see? Book our blueprint service for the full execution plan!
+          不知道从何下手？告诉 AI 你喜欢的风格，我们将免费为你生成设计灵感卡片。
+          喜欢这个方案？预约我们的“线上设计服务”获取完整落地指南！
         </p>
       </div>
 
       {/* Input Section */}
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-orange-100 grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
         <div>
-          <label className="block text-xs font-semibold uppercase text-stone-500 mb-1">Your Style</label>
+          <label className="block text-xs font-semibold uppercase text-stone-500 mb-1">喜欢的风格</label>
           <input 
             type="text" 
             value={style}
             onChange={(e) => setStyle(e.target.value)}
-            placeholder="e.g. Minimalist, Boho, Cyberpunk"
+            placeholder="例如：极简风、波西米亚、赛博朋克"
             className="w-full p-3 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold uppercase text-stone-500 mb-1">Room Type</label>
+          <label className="block text-xs font-semibold uppercase text-stone-500 mb-1">房型</label>
           <select 
             value={roomSize}
             onChange={(e) => setRoomSize(e.target.value)}
             className="w-full p-3 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
           >
-            <option>Standard 4-bunk dorm</option>
-            <option>6-person shared suite</option>
-            <option>Double room</option>
-            <option>Single studio</option>
+            <option>标准四人间 (上床下桌)</option>
+            <option>六人套间</option>
           </select>
         </div>
         <button
@@ -746,7 +696,7 @@ const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
           disabled={loading || !style}
           className="w-full p-3 bg-stone-800 text-white rounded-lg hover:bg-stone-900 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition flex items-center justify-center gap-2"
         >
-          {loading ? 'Thinking...' : 'Generate Idea'}
+          {loading ? '思考中...' : '生成灵感'}
         </button>
       </div>
 
@@ -768,14 +718,14 @@ const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
               onClick={onBookNow}
               className="whitespace-nowrap px-6 py-2 bg-orange-600 text-white rounded-full font-medium hover:bg-orange-700 transition flex items-center gap-2 shadow-lg shadow-orange-200"
             >
-              Get Full Blueprint ¥10 <ArrowRight size={16} />
+              获取完整设计图 ¥10 <ArrowRight size={16} />
             </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-orange-50/50 p-5 rounded-xl shadow-sm border border-orange-100">
               <div className="flex items-center gap-2 mb-3 text-stone-800 font-semibold">
-                <Palette size={18} className="text-orange-500" /> Color Palette
+                <Palette size={18} className="text-orange-500" /> 配色方案
               </div>
               <div className="flex flex-wrap gap-2">
                 {idea.colorPalette.map((color, idx) => (
@@ -792,7 +742,7 @@ const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
 
             <div className="bg-stone-50 p-5 rounded-xl shadow-sm border border-stone-100">
               <div className="flex items-center gap-2 mb-3 text-stone-800 font-semibold">
-                <Armchair size={18} className="text-orange-500" /> Layout Advice
+                <Armchair size={18} className="text-orange-500" /> 布局建议
               </div>
               <p className="text-sm text-stone-600 leading-relaxed">
                 {idea.furnitureArrangement}
@@ -801,7 +751,7 @@ const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
 
             <div className="bg-stone-50 p-5 rounded-xl shadow-sm border border-stone-100">
               <div className="flex items-center gap-2 mb-3 text-stone-800 font-semibold">
-                <ShoppingBag size={18} className="text-orange-500" /> Suggested Decor
+                <ShoppingBag size={18} className="text-orange-500" /> 推荐好物
               </div>
               <ul className="text-sm text-stone-600 space-y-1 list-disc pl-4">
                 {idea.decorItems.map((item, idx) => (
@@ -812,7 +762,7 @@ const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
           </div>
           
           <div className="mt-6 text-center text-xs text-stone-400">
-            * This is an AI-generated preview. Book the Blueprint Service for exact measurements and shopping links.
+            * 这是一个 AI 生成的预览。预约设计服务以获取精确尺寸和购买链接。
           </div>
         </div>
       )}
@@ -829,7 +779,7 @@ export default AIPlanner;`
             
             btn.disabled = true;
             status.style.display = 'block';
-            status.innerText = "Packing files...";
+            status.innerText = "正在打包...";
             status.style.color = "#78716c";
 
             try {
@@ -846,7 +796,7 @@ export default AIPlanner;`
                 // Trigger download
                 saveAs(blob, "qiwuji-dorm-decor.zip");
                 
-                status.innerText = "Download started!";
+                status.innerText = "下载已开始！解压后即可使用。";
                 status.style.color = "#16a34a"; // green
                 
                 setTimeout(() => {
@@ -856,7 +806,7 @@ export default AIPlanner;`
 
             } catch (err) {
                 console.error("Zip Error:", err);
-                status.innerText = "Error creating zip file. See console.";
+                status.innerText = "创建压缩包时出错，请查看控制台。";
                 status.style.color = "#dc2626"; // red
                 btn.disabled = false;
             }
@@ -864,4 +814,3 @@ export default AIPlanner;`
     </script>
 </body>
 </html>
-    

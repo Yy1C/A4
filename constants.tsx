@@ -5,50 +5,27 @@ import React from 'react';
 export const SERVICES: ServiceOption[] = [
   {
     id: ServiceType.BLUEPRINT,
-    title: "Online Blueprint Design",
+    title: "线上设计方案",
     price: 10,
-    description: "Perfect for DIYers. We provide the plan; you make it happen.",
+    description: "适合动手能力强的同学。我们提供方案，你来实现。",
     features: [
-      "2D Layout Diagram (PDF)",
-      "Custom Color Palette",
-      "Shopping List with Links",
-      "Online Consultation (30 mins)"
+      "2D 平面布局图 (PDF)",
+      "定制配色方案",
+      "软装购物清单 (含链接)",
+      "线上咨询 (30分钟)"
     ]
   },
   {
     id: ServiceType.FULL_SERVICE,
-    title: "Door-to-Door Decoration",
-    price: 60,
-    description: "Sit back and relax. We transform your space for you.",
+    title: "上门全案改造",
+    price: 40,
+    description: "坐享其成。我们为你搞定一切。",
     features: [
-      "Everything in Blueprint Design",
-      "On-site Furniture Arrangement",
-      "Decor Installation",
-      "Cable Management & Cleanup",
-      "Post-install Photo Shoot"
+      "包含所有线上设计服务",
+      "上门家具布局调整",
+      "软装安装与布置",
+      "线路收纳与清洁",
+      "改造后精美摄影"
     ]
-  }
-];
-
-export const GALLERY_IMAGES = [
-  {
-    url: "https://picsum.photos/id/106/800/600",
-    title: "Cozy Warmth",
-    desc: "A warm, light-filled setup for small spaces."
-  },
-  {
-    url: "https://picsum.photos/id/364/800/600",
-    title: "Modern Minimalist",
-    desc: "Clean lines and monochromatic tones."
-  },
-  {
-    url: "https://picsum.photos/id/449/800/600",
-    title: "Artistic Haven",
-    desc: "For the creative student."
-  },
-  {
-    url: "https://picsum.photos/id/180/800/600",
-    title: "Study Focus",
-    desc: "Optimized for productivity and focus."
   }
 ];

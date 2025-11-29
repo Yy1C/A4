@@ -42,16 +42,16 @@ const BookingForm: React.FC = () => {
     return (
       <div className="flex flex-col items-center justify-center p-12 bg-orange-50 rounded-2xl border border-orange-100 animate-in fade-in zoom-in duration-300">
         <CheckCircle2 size={64} className="text-orange-600 mb-4" />
-        <h2 className="text-2xl font-bold text-orange-800 mb-2">Booking Confirmed!</h2>
+        <h2 className="text-2xl font-bold text-orange-800 mb-2">预约成功！</h2>
         <p className="text-center text-stone-600 mb-6">
-          Thank you, {formData.name}. We have received your request for the <span className="font-semibold">{formData.serviceType === ServiceType.BLUEPRINT ? 'Blueprint Design' : 'Full Decoration'}</span> service.
+          感谢您，{formData.name}。我们已收到您关于 <span className="font-semibold">{formData.serviceType === ServiceType.BLUEPRINT ? '线上设计方案' : '上门全案改造'}</span> 的预约申请。
         </p>
-        <p className="text-sm text-stone-500">We will contact you at {formData.phone} shortly.</p>
+        <p className="text-sm text-stone-500">我们会尽快通过 {formData.phone} 联系您。</p>
         <button 
           onClick={() => setStatus('idle')}
           className="mt-8 px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition"
         >
-          Book Another
+          再约一单
         </button>
       </div>
     );
@@ -59,7 +59,7 @@ const BookingForm: React.FC = () => {
 
   return (
     <div className="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200">
-      <h2 className="text-2xl font-bold text-stone-800 mb-6">Book Your Transformation</h2>
+      <h2 className="text-2xl font-bold text-stone-800 mb-6">预约您的宿舍改造</h2>
       
       <form onSubmit={handleSubmit} className="space-y-6">
         
@@ -89,7 +89,7 @@ const BookingForm: React.FC = () => {
         {/* Personal Details */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-1">Full Name</label>
+            <label className="block text-sm font-medium text-stone-700 mb-1">姓名</label>
             <input
               required
               name="name"
@@ -97,11 +97,11 @@ const BookingForm: React.FC = () => {
               value={formData.name}
               onChange={handleChange}
               className="w-full px-4 py-2 rounded-lg border border-stone-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
-              placeholder="Li Ming"
+              placeholder="李明"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-1">Phone Number</label>
+            <label className="block text-sm font-medium text-stone-700 mb-1">手机号码</label>
             <input
               required
               name="phone"
@@ -116,7 +116,7 @@ const BookingForm: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-1">Student ID</label>
+            <label className="block text-sm font-medium text-stone-700 mb-1">学号</label>
             <input
               required
               name="studentId"
@@ -127,7 +127,7 @@ const BookingForm: React.FC = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-1">Dorm Building & Room</label>
+            <label className="block text-sm font-medium text-stone-700 mb-1">宿舍楼及房间号</label>
             <input
               required
               name="dormNumber"
@@ -135,13 +135,13 @@ const BookingForm: React.FC = () => {
               value={formData.dormNumber}
               onChange={handleChange}
               className="w-full px-4 py-2 rounded-lg border border-stone-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
-              placeholder="Building A, Room 302"
+              placeholder="A栋 302室"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">Preferred Date (For On-site Service)</label>
+          <label className="block text-sm font-medium text-stone-700 mb-1">期望上门日期 (仅限上门服务)</label>
           <input
             name="preferredDate"
             type="date"
@@ -152,14 +152,14 @@ const BookingForm: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">Special Requests / Style Preferences</label>
+          <label className="block text-sm font-medium text-stone-700 mb-1">特殊需求 / 风格偏好</label>
           <textarea
             name="notes"
             rows={3}
             value={formData.notes}
             onChange={handleChange}
             className="w-full px-4 py-2 rounded-lg border border-stone-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
-            placeholder="I prefer warm lighting and a minimalist desk setup..."
+            placeholder="例如：我喜欢暖色调灯光，想要一个极简风格的桌面..."
           />
         </div>
 
@@ -170,10 +170,10 @@ const BookingForm: React.FC = () => {
         >
           {status === 'submitting' ? (
             <>
-              <Loader2 className="animate-spin" size={20} /> Processing...
+              <Loader2 className="animate-spin" size={20} /> 提交中...
             </>
           ) : (
-            'Confirm Booking'
+            '确认预约'
           )}
         </button>
 

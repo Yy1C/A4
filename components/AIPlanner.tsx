@@ -9,7 +9,7 @@ interface AIPlannerProps {
 
 const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
   const [style, setStyle] = useState('');
-  const [roomSize, setRoomSize] = useState('Standard 4-bunk dorm');
+  const [roomSize, setRoomSize] = useState('标准四人间 (上床下桌)');
   const [occupants, setOccupants] = useState(4);
   const [idea, setIdea] = useState<DesignIdea | null>(null);
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
       const result = await generateDormConcept(style, roomSize, occupants);
       setIdea(result);
     } catch (err) {
-      setError("Failed to generate ideas. Please try again.");
+      setError("生成失败，请重试。");
     } finally {
       setLoading(false);
     }
@@ -35,37 +35,35 @@ const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
       <div className="text-center space-y-4">
         <h2 className="text-3xl font-bold text-stone-800 flex items-center justify-center gap-2">
           <Sparkles className="text-orange-500" fill="currentColor" />
-          AI Dorm Consultant
+          AI 宿舍改造顾问
         </h2>
         <p className="text-stone-600 max-w-xl mx-auto">
-          Not sure where to start? Tell our AI about your style preferences, and we'll generate a free concept card for you. 
-          Like what you see? Book our blueprint service for the full execution plan!
+          不知道从何下手？告诉 AI 你喜欢的风格，我们将免费为你生成设计灵感卡片。
+          喜欢这个方案？预约我们的“线上设计服务”获取完整落地指南！
         </p>
       </div>
 
       {/* Input Section */}
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-orange-100 grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
         <div>
-          <label className="block text-xs font-semibold uppercase text-stone-500 mb-1">Your Style</label>
+          <label className="block text-xs font-semibold uppercase text-stone-500 mb-1">喜欢的风格</label>
           <input 
             type="text" 
             value={style}
             onChange={(e) => setStyle(e.target.value)}
-            placeholder="e.g. Minimalist, Boho, Cyberpunk"
+            placeholder="例如：极简风、波西米亚、赛博朋克"
             className="w-full p-3 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold uppercase text-stone-500 mb-1">Room Type</label>
+          <label className="block text-xs font-semibold uppercase text-stone-500 mb-1">房型</label>
           <select 
             value={roomSize}
             onChange={(e) => setRoomSize(e.target.value)}
             className="w-full p-3 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
           >
-            <option>Standard 4-bunk dorm</option>
-            <option>6-person shared suite</option>
-            <option>Double room</option>
-            <option>Single studio</option>
+            <option>标准四人间 (上床下桌)</option>
+            <option>六人套间</option>
           </select>
         </div>
         <button
@@ -73,7 +71,7 @@ const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
           disabled={loading || !style}
           className="w-full p-3 bg-stone-800 text-white rounded-lg hover:bg-stone-900 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition flex items-center justify-center gap-2"
         >
-          {loading ? 'Thinking...' : 'Generate Idea'}
+          {loading ? '思考中...' : '生成灵感'}
         </button>
       </div>
 
@@ -95,14 +93,14 @@ const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
               onClick={onBookNow}
               className="whitespace-nowrap px-6 py-2 bg-orange-600 text-white rounded-full font-medium hover:bg-orange-700 transition flex items-center gap-2 shadow-lg shadow-orange-200"
             >
-              Get Full Blueprint ¥10 <ArrowRight size={16} />
+              获取完整设计图 ¥10 <ArrowRight size={16} />
             </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-orange-50/50 p-5 rounded-xl shadow-sm border border-orange-100">
               <div className="flex items-center gap-2 mb-3 text-stone-800 font-semibold">
-                <Palette size={18} className="text-orange-500" /> Color Palette
+                <Palette size={18} className="text-orange-500" /> 配色方案
               </div>
               <div className="flex flex-wrap gap-2">
                 {idea.colorPalette.map((color, idx) => (
@@ -119,7 +117,7 @@ const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
 
             <div className="bg-stone-50 p-5 rounded-xl shadow-sm border border-stone-100">
               <div className="flex items-center gap-2 mb-3 text-stone-800 font-semibold">
-                <Armchair size={18} className="text-orange-500" /> Layout Advice
+                <Armchair size={18} className="text-orange-500" /> 布局建议
               </div>
               <p className="text-sm text-stone-600 leading-relaxed">
                 {idea.furnitureArrangement}
@@ -128,7 +126,7 @@ const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
 
             <div className="bg-stone-50 p-5 rounded-xl shadow-sm border border-stone-100">
               <div className="flex items-center gap-2 mb-3 text-stone-800 font-semibold">
-                <ShoppingBag size={18} className="text-orange-500" /> Suggested Decor
+                <ShoppingBag size={18} className="text-orange-500" /> 推荐好物
               </div>
               <ul className="text-sm text-stone-600 space-y-1 list-disc pl-4">
                 {idea.decorItems.map((item, idx) => (
@@ -139,7 +137,7 @@ const AIPlanner: React.FC<AIPlannerProps> = ({ onBookNow }) => {
           </div>
           
           <div className="mt-6 text-center text-xs text-stone-400">
-            * This is an AI-generated preview. Book the Blueprint Service for exact measurements and shopping links.
+            * 这是一个 AI 生成的预览。预约设计服务以获取精确尺寸和购买链接。
           </div>
         </div>
       )}

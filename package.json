@@ -1,12 +1,10 @@
 {
-  "homepage": ".",
   "name": "qiwuji-dorm-decor",
   "version": "1.0.0",
   "description": "Student dorm redecoration service booking and blueprint showcase with AI design features.",
   "main": "index.html",
   "scripts": {
-    "start": "npx serve",
-    "build": "vite build"
+    "start": "npx serve"
   },
   "keywords": [
     "react",
@@ -22,9 +20,5 @@
     "react-dom": "^19.2.0",
     "@google/genai": "^1.30.0",
     "lucide-react": "^0.554.0"
-  },
-  "devDependencies": {
-    "vite": "^5.0.0",
-    "@vitejs/plugin-react": "^4.2.1"
   }
 }
